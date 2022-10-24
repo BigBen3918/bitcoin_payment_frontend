@@ -8,6 +8,7 @@ export default function Main() {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [amount, setAmount] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const HandleSubmit = async () => {
         if (address.trim() === "") {
@@ -20,6 +21,7 @@ export default function Main() {
         }
 
         try {
+            setLoading(true);
             const request = await Action.Request_Payment({
                 email: email.trim(),
                 address: address.trim(),
@@ -27,7 +29,9 @@ export default function Main() {
             });
 
             navigate(`/${request.data.order}`);
+            setLoading(false);
         } catch (err: any) {
+            setLoading(false);
             if (err.response !== undefined)
                 switch (err.response.status) {
                     case 404:
@@ -76,7 +80,11 @@ export default function Main() {
                         />
                         <div className="spacer-10"></div>
                         <hr />
-                        <button onClick={HandleSubmit}>Submit</button>
+                        {loading ? (
+                            <button>Submitting...</button>
+                        ) : (
+                            <button onClick={HandleSubmit}>Submit</button>
+                        )}
                         <div className="spacer-10"></div>
                     </div>
                 </div>
