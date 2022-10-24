@@ -1,0 +1,281 @@
+@mixin common_background($pad) {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    padding: $pad;
+    border-radius: 20px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    // background: linear-gradient(45deg, #1147aa, var(--primary));
+}
+
+.title {
+    padding-left: 20%;
+
+    @media screen and (max-width: 992px) {
+        padding-left: 5%;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: unset;
+    }
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+        height: 80vh;
+        width: 60%;
+        @include common_background(20px);
+
+        > h2 {
+            text-align: center;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        > p {
+            margin: 0;
+        }
+
+        hr {
+            width: 80%;
+            border-top: 1px solid #adadad;
+        }
+
+        input {
+            width: 80%;
+            outline: 0;
+            border: none;
+            font-weight: 500;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background: #f0f0f0;
+            transition: 0.3s all;
+        }
+
+        button {
+            display: flex;
+            font-family: sans-serif;
+            justify-content: center;
+            gap: 10px;
+            width: 80%;
+            align-items: center;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.699);
+            transition: 0.3s all;
+            cursor: pointer;
+            color: white;
+            background: var(--primary);
+
+            svg {
+                font-size: 15px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            width: 90%;
+
+            input {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+}
+
+.next_main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+        height: 80vh;
+        min-height: 600px;
+        width: 60%;
+        @include common_background(20px);
+
+        .success {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-overflow: ellipsis;
+            padding: 0 20px;
+
+            hr {
+                width: 100%;
+            }
+
+            h2 {
+                margin: 0;
+                padding-bottom: 20px;
+                color: #1fa91f;
+                text-align: center;
+            }
+
+            > img {
+                width: 200px;
+            }
+
+            > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                width: 100%;
+
+                p {
+                    margin: 0;
+                }
+
+                > div:first-child {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+                    flex: 1;
+                    min-width: 200px;
+                }
+
+                > div:last-child {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    > img {
+                        width: 50px;
+                    }
+                }
+
+                @media screen and (max-width: 425px) {
+                    align-items: center;
+                    justify-content: center;
+
+                    > div {
+                        min-width: unset;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        > h2 {
+            text-align: center;
+            margin: 0;
+            padding: 20px 0;
+
+            @media screen and (max-width: 400px) {
+                font-size: 10vw;
+            }
+        }
+
+        > p {
+            margin: 0;
+        }
+
+        hr {
+            position: relative;
+            width: 60%;
+            border-top: 1px solid #adadad;
+        }
+
+        .qrcode {
+            height: auto;
+            min-height: 100px;
+        }
+
+        > span {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 5px;
+            width: 60%;
+
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                outline: 0;
+                border: none;
+                font-weight: 500;
+                padding: 10px 20px;
+                border-radius: 8px;
+                background: #f0f0f0;
+                transition: 0.3s all;
+
+                button {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+
+                    svg {
+                        font-size: 25px;
+                    }
+                }
+
+                p {
+                    margin: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            width: 90%;
+
+            hr {
+                width: 80%;
+            }
+
+            > span {
+                width: 80%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
+
+        @media screen and (max-width: 576px) {
+            hr {
+                width: 100%;
+            }
+
+            > span {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 300px) {
+            .qrcode {
+                width: 100%;
+            }
+        }
+    }
+}
