@@ -1,17 +1,24 @@
 @mixin common_background($pad) {
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
     padding: $pad;
     border-radius: 20px;
-    gap: 30px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    // background: linear-gradient(45deg, #1147aa, var(--primary));
+    background: linear-gradient(to bottom, white, transparent);
 }
 
 .title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    > img {
+        width: 50px;
+    }
+
     padding-left: 20%;
 
     @media screen and (max-width: 992px) {
@@ -23,40 +30,70 @@
     }
 }
 
+hr {
+    position: relative;
+    width: 100%;
+    border-top: 1px solid #adadad;
+
+    &:after {
+        content: "";
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgb(0, 0, 0);
+        background-color: red;
+        border-radius: 50%;
+    }
+}
+
 .main {
     display: flex;
     align-items: center;
     justify-content: center;
 
     > div {
-        height: 80vh;
         width: 60%;
-        @include common_background(20px);
+        @include common_background(0 70px);
+
+        @media screen and (max-width: 500px) {
+            @include common_background(0 20px);
+        }
 
         > h2 {
             text-align: center;
             margin: 0;
-            padding: 20px 0;
+            padding-top: 4.5rem;
         }
 
         > p {
             margin: 0;
         }
 
-        hr {
-            width: 80%;
-            border-top: 1px solid #adadad;
-        }
+        .info_field {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            gap: 25px;
 
-        input {
-            width: 80%;
-            outline: 0;
-            border: none;
-            font-weight: 500;
-            padding: 15px 20px;
-            border-radius: 8px;
-            background: #f0f0f0;
-            transition: 0.3s all;
+            > div {
+                width: 100%;
+            }
+
+            input {
+                width: 100%;
+                outline: 0;
+                border: none;
+                font-weight: 500;
+                padding: 15px 20px;
+                border-radius: 8px;
+                background: #dfdede;
+                transition: 0.3s all;
+            }
         }
 
         button {
@@ -64,34 +101,40 @@
             font-family: sans-serif;
             justify-content: center;
             gap: 10px;
-            width: 80%;
+            width: 100%;
             align-items: center;
             padding: 15px 20px;
             border: none;
             border-radius: 10px;
             font-size: 15px;
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.699);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             transition: 0.3s all;
             cursor: pointer;
             color: white;
-            background: var(--primary);
+            background: var(--secondary);
 
             svg {
                 font-size: 15px;
             }
         }
 
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h6 {
+                margin: 0;
+            }
+
+            img {
+                width: 35px;
+            }
+        }
+
         @media screen and (max-width: 992px) {
             width: 90%;
-
-            input {
-                width: 100%;
-            }
-
-            button {
-                width: 100%;
-            }
         }
 
         @media screen and (max-width: 768px) {
@@ -106,10 +149,12 @@
     justify-content: center;
 
     > div {
-        height: 80vh;
-        min-height: 600px;
         width: 60%;
-        @include common_background(20px);
+        @include common_background(0 70px);
+
+        @media screen and (max-width: 500px) {
+            @include common_background(0 20px);
+        }
 
         .success {
             display: flex;
@@ -117,17 +162,15 @@
             justify-content: space-between;
             align-items: center;
             text-overflow: ellipsis;
-            padding: 0 20px;
 
             hr {
                 width: 100%;
             }
 
             h2 {
-                margin: 0;
-                padding-bottom: 20px;
                 color: #1fa91f;
                 text-align: center;
+                margin: 0;
             }
 
             > img {
@@ -135,6 +178,7 @@
             }
 
             > div {
+                padding-top: 4.5rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -180,21 +224,11 @@
         > h2 {
             text-align: center;
             margin: 0;
-            padding: 20px 0;
-
-            @media screen and (max-width: 400px) {
-                font-size: 10vw;
-            }
+            padding-top: 4.5rem;
         }
 
         > p {
             margin: 0;
-        }
-
-        hr {
-            position: relative;
-            width: 60%;
-            border-top: 1px solid #adadad;
         }
 
         .qrcode {
@@ -208,7 +242,7 @@
             justify-content: center;
             align-items: flex-start;
             gap: 5px;
-            width: 60%;
+            width: 100%;
 
             div {
                 display: flex;
@@ -220,7 +254,7 @@
                 font-weight: 500;
                 padding: 10px 20px;
                 border-radius: 8px;
-                background: #f0f0f0;
+                background: #dfdede;
                 transition: 0.3s all;
 
                 button {
@@ -231,6 +265,7 @@
                     border: none;
                     outline: none;
                     cursor: pointer;
+                    background-color: transparent;
 
                     svg {
                         font-size: 25px;
@@ -246,30 +281,26 @@
             }
         }
 
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h6 {
+                margin: 0;
+            }
+
+            img {
+                width: 35px;
+            }
+        }
+
         @media screen and (max-width: 992px) {
             width: 90%;
-
-            hr {
-                width: 80%;
-            }
-
-            > span {
-                width: 80%;
-            }
         }
 
         @media screen and (max-width: 768px) {
             width: 100%;
-        }
-
-        @media screen and (max-width: 576px) {
-            hr {
-                width: 100%;
-            }
-
-            > span {
-                width: 100%;
-            }
         }
 
         @media screen and (max-width: 300px) {

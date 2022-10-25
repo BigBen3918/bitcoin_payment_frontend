@@ -1,13 +1,14 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
-import { BiCopy } from "react-icons/bi";
+import { BiCopy, BiCheckDouble } from "react-icons/bi";
 import { Toast, StyledAddress, StyledFloat, copyToClipboard } from "../utils";
 import moment from "moment";
 
 import Action from "../service";
 import btcLogo from "../assets/images/bitcoin.png";
 import confirmImg from "../assets/images/confirm.png";
+import bitcoinFooter from "../assets/images/bitcoin_footer.png";
 
 export default function OrderStatus() {
     const { orderid } = useParams();
@@ -73,7 +74,10 @@ export default function OrderStatus() {
 
     return (
         <div className="container">
-            <h3 className="title">Bitcoin Payment</h3>
+            <div className="title">
+                <img src={bitcoinFooter} alt="" />
+                <h3>Bitcoin Payment</h3>
+            </div>
             <div className="next_main">
                 <div>
                     {data ? (
@@ -104,12 +108,14 @@ export default function OrderStatus() {
                                 <hr />
                                 <img src={confirmImg} alt="" />
                                 <h2>Paid and Confirmed</h2>
+                                <div className="spacer-10"></div>
                                 <hr />
                                 <p style={{ color: "grey" }}>
                                     The payment is processed on behalf of
                                     merchant that referred you to this invoice
                                     by Bitcoin EVM
                                 </p>
+                                <div className="spacer-10"></div>
                             </div>
                         ) : (
                             <>
@@ -124,9 +130,10 @@ export default function OrderStatus() {
                                     value={data?.result2?.address}
                                     viewBox={`0 0 200 200`}
                                 />
+                                <hr />
                                 <span>
                                     <label>
-                                        <b>Amount:</b>
+                                        <b>Amount</b>
                                     </label>
                                     <div>
                                         <p>
@@ -136,14 +143,17 @@ export default function OrderStatus() {
                                             ) + " BTC"}
                                         </p>
                                         <button onClick={copyAmount}>
-                                            <BiCopy />
-                                            {amountCopyFlag ? "Copied" : "Copy"}
+                                            {amountCopyFlag ? (
+                                                <BiCheckDouble />
+                                            ) : (
+                                                <BiCopy />
+                                            )}
                                         </button>
                                     </div>
                                 </span>
                                 <span>
                                     <label>
-                                        <b>To:</b>
+                                        <b>Address</b>
                                     </label>
                                     <div>
                                         <p>
@@ -152,13 +162,27 @@ export default function OrderStatus() {
                                             )}
                                         </p>
                                         <button onClick={copyAddress}>
-                                            <BiCopy />
-                                            {addressCopyFlag
-                                                ? "Copied"
-                                                : "Copy"}
+                                            {addressCopyFlag ? (
+                                                <BiCheckDouble />
+                                            ) : (
+                                                <BiCopy />
+                                            )}
                                         </button>
                                     </div>
                                 </span>
+                                <div className="footer">
+                                    <p style={{ color: "grey" }}>Powered by</p>
+                                    <img src={bitcoinFooter} alt="" />
+                                    <h6>BitcoinEVM</h6>
+                                </div>
+                                <p
+                                    className="text-center"
+                                    style={{ color: "silver" }}
+                                >
+                                    The payment is processed on behalf of the
+                                    merchant that refered you to this invoice by
+                                    BitcoinEVM
+                                </p>
                                 <div className="spacer-10"></div>
                             </>
                         )

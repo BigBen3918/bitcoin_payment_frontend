@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "../utils";
 import Action from "../service";
+import bitcoinFooter from "../assets/images/bitcoin_footer.png";
 
 export default function Main() {
     const navigate = useNavigate();
@@ -52,32 +53,71 @@ export default function Main() {
     return (
         <>
             <div className="container">
-                <h3 className="title">Bitcoin Payment</h3>
+                <div className="title">
+                    <img src={bitcoinFooter} alt="" />
+                    <h3>Bitcoin Payment</h3>
+                </div>
                 <div className="main">
                     <div>
-                        <h2>Make a request</h2>
+                        <h2>Exchange Request</h2>
                         <p style={{ color: "grey" }}>
-                            Enter your infomations to receive the payment
-                            receipt:
+                            The exchange amount must be at least{" "}
+                            <b style={{ color: "var(--secondary)" }}>
+                                +0.00000001
+                            </b>{" "}
+                            <b>BTC</b>. Fill out the form to request a exchange
+                            for the excess amount.
                         </p>
-                        <input
-                            type={"email"}
-                            placeholder="enter the email"
-                            value={email}
-                            onChange={(e: any) => setEmail(e.target.value)}
-                        />
-                        <input
-                            type={"text"}
-                            placeholder="enter the address"
-                            value={address}
-                            onChange={(e: any) => setAddress(e.target.value)}
-                        />
-                        <input
-                            type={"number"}
-                            placeholder="enter amount"
-                            value={amount}
-                            onChange={(e: any) => setAmount(e.target.value)}
-                        />
+                        <div className="info_field">
+                            <div>
+                                <label>
+                                    <b>
+                                        Your Email Address
+                                        <i style={{ color: "red" }}>*</i>
+                                    </b>
+                                </label>
+                                <input
+                                    type={"email"}
+                                    placeholder="Your email"
+                                    value={email}
+                                    onChange={(e: any) =>
+                                        setEmail(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div>
+                                <label>
+                                    <b>
+                                        Your Bitcoin Address
+                                        <i style={{ color: "red" }}>*</i>
+                                    </b>
+                                </label>
+                                <input
+                                    type={"text"}
+                                    placeholder="Your Bitcoin address"
+                                    value={address}
+                                    onChange={(e: any) =>
+                                        setAddress(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div>
+                                <label>
+                                    <b>
+                                        Swap Amount
+                                        <i style={{ color: "red" }}>*</i>
+                                    </b>
+                                </label>
+                                <input
+                                    type={"number"}
+                                    placeholder="Refound amount"
+                                    value={amount}
+                                    onChange={(e: any) =>
+                                        setAmount(e.target.value)
+                                    }
+                                />
+                            </div>
+                        </div>
                         <div className="spacer-10"></div>
                         <hr />
                         {loading ? (
@@ -85,6 +125,15 @@ export default function Main() {
                         ) : (
                             <button onClick={HandleSubmit}>Submit</button>
                         )}
+                        <div className="footer">
+                            <p style={{ color: "grey" }}>Powered by</p>
+                            <img src={bitcoinFooter} alt="" />
+                            <h6>BitcoinEVM</h6>
+                        </div>
+                        <p className="text-center" style={{ color: "silver" }}>
+                            The payment is processed on behalf of the merchant
+                            that refered you to this invoice by BitcoinEVM
+                        </p>
                         <div className="spacer-10"></div>
                     </div>
                 </div>
