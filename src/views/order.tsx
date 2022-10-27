@@ -105,11 +105,9 @@ export default function OrderStatus() {
                                         <img src={btcLogo} alt="" />
                                     </div>
                                 </div>
-                                <hr />
                                 <img src={confirmImg} alt="" />
                                 <h2>Paid and Confirmed</h2>
                                 <div className="spacer-10"></div>
-                                <hr />
                                 <p style={{ color: "grey" }}>
                                     The payment is processed on behalf of
                                     merchant that referred you to this invoice
@@ -130,8 +128,7 @@ export default function OrderStatus() {
                                     value={data?.result2?.address}
                                     viewBox={`0 0 200 200`}
                                 />
-                                <hr />
-                                <span>
+                                <span style={{ paddingTop: "2rem" }}>
                                     <label>
                                         <b>Amount</b>
                                     </label>
@@ -177,7 +174,7 @@ export default function OrderStatus() {
                                 </div>
                                 <p
                                     className="text-center"
-                                    style={{ color: "silver" }}
+                                    style={{ color: "#999999" }}
                                 >
                                     The payment is processed on behalf of the
                                     merchant that refered you to this invoice by

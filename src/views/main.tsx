@@ -88,7 +88,7 @@ export default function Main() {
                             <div>
                                 <label>
                                     <b>
-                                        Your Bitcoin Address
+                                        Your EVM Address
                                         <i style={{ color: "red" }}>*</i>
                                     </b>
                                 </label>
@@ -118,8 +118,6 @@ export default function Main() {
                                 />
                             </div>
                         </div>
-                        <div className="spacer-10"></div>
-                        <hr />
                         {loading ? (
                             <button>Submitting...</button>
                         ) : (
@@ -130,7 +128,7 @@ export default function Main() {
                             <img src={bitcoinFooter} alt="" />
                             <h6>BitcoinEVM</h6>
                         </div>
-                        <p className="text-center" style={{ color: "silver" }}>
+                        <p className="text-center" style={{ color: "#999999" }}>
                             The payment is processed on behalf of the merchant
                             that refered you to this invoice by BitcoinEVM
                         </p>
