@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: white;//linear-gradient(to bottom, white, transparent);
+    background: white; //linear-gradient(to bottom, white, transparent);
 
     @media screen and (max-width: 768px) {
         padding: 0 20px;
@@ -84,7 +84,7 @@ hr {
                 width: 100%;
             }
 
-            label{
+            label {
                 line-height: 2rem;
             }
             input {
@@ -96,9 +96,15 @@ hr {
                 background: #efefef;
                 transition: 0.3s all;
                 outline: 1px solid transparent;
-                &:focus{
+                &:focus {
                     outline: 1px solid orange;
                 }
+            }
+
+            p {
+                margin: 0;
+                padding-left: 10px;
+                color: grey;
             }
         }
 
@@ -123,7 +129,7 @@ hr {
             svg {
                 font-size: 15px;
             }
-            &:hover{
+            &:hover {
                 background-color: rgb(223, 145, 1);
             }
         }

@@ -1,15 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Toast } from "../utils";
+import { StyledFloat, Toast } from "../utils";
 import Action from "../service";
 import bitcoinFooter from "../assets/images/bitcoin_footer.png";
+import axios from "axios";
 
 export default function Main() {
     const navigate = useNavigate();
+    const [time, setTime] = useState(+new Date());
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [amount, setAmount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [btcPrice, setBtcPrice] = useState(0);
+
+    useEffect(() => {
+        let timeHandler: any;
+        timeHandler = setTimeout(() => {
+            (async () => {
+                try {
+                    const result = await axios.get(
+                        "https://blockchain.info/ticker"
+                    );
+
+                    setBtcPrice(result.data.USD.last);
+                    setTime(+new Date());
+                } catch (ex: any) {
+                    console.log(ex);
+                }
+            })();
+        }, 10000);
+
+        return () => timeHandler && clearTimeout(timeHandler);
+    }, [time]);
 
     const HandleSubmit = async () => {
         if (address.trim() === "") {
@@ -116,6 +139,12 @@ export default function Main() {
                                         setAmount(e.target.value)
                                     }
                                 />
+                                <p>
+                                    {amount > 0
+                                        ? StyledFloat(btcPrice * amount, 3) +
+                                          "$"
+                                        : null}
+                                </p>
                             </div>
                         </div>
                         {loading ? (
