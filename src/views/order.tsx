@@ -9,6 +9,10 @@ import Action from "../service";
 import btcLogo from "../assets/images/bitcoin.png";
 import confirmImg from "../assets/images/confirm.png";
 import bitcoinFooter from "../assets/images/bitcoin_footer.png";
+import back from "../assets/images/back.png";
+import Footer from "../components/footer";
+import Content from "../components/content";
+import Feature from "../components/feature";
 
 export default function OrderStatus() {
     const { orderid } = useParams();
@@ -73,15 +77,15 @@ export default function OrderStatus() {
     };
 
     return (
-        <div className="container">
-            <div className="title">
-                <img src={bitcoinFooter} alt="" />
-                <h3>Bitcoin Payment</h3>
-            </div>
-            <div className="next_main">
-                <div>
+        <div className="relative">
+            <div className="container-xl">
+                <div className="title">
+                    <img src={bitcoinFooter} alt="" />
+                    <h3>Bitcoin Payment</h3>
+                </div>
+                <div className="flex middle center next_back">
                     {data ? (
-                        data.result1.status === "success" ? (
+                        data?.result1?.status === "success" ? (
                             <div className="success">
                                 <div>
                                     <div>
@@ -106,90 +110,88 @@ export default function OrderStatus() {
                                     </div>
                                 </div>
                                 <img src={confirmImg} alt="" />
-                                <h2>Paid and Confirmed</h2>
-                                <div className="spacer-10"></div>
-                                <p style={{ color: "grey" }}>
-                                    The payment is processed on behalf of
-                                    merchant that referred you to this invoice
-                                    by Bitcoin EVM
-                                </p>
-                                <div className="spacer-10"></div>
-                            </div>
-                        ) : (
-                            <>
-                                <h2>Pay For Your Order</h2>
-                                <p style={{ color: "grey" }}>
-                                    Scan the QR code, or copy and paste the
-                                    payment details into your wallet.
-                                </p>
-                                <QRCode
-                                    size={200}
-                                    className="qrcode"
-                                    value={data?.result2?.address}
-                                    viewBox={`0 0 200 200`}
-                                />
-                                <span style={{ paddingTop: "2rem" }}>
-                                    <label>
-                                        <b>Amount</b>
-                                    </label>
-                                    <div>
-                                        <p>
-                                            {StyledFloat(
-                                                data?.result1?.amount,
-                                                8
-                                            ) + " BTC"}
-                                        </p>
-                                        <button onClick={copyAmount}>
-                                            {amountCopyFlag ? (
-                                                <BiCheckDouble />
-                                            ) : (
-                                                <BiCopy />
-                                            )}
-                                        </button>
-                                    </div>
-                                </span>
-                                <span>
-                                    <label>
-                                        <b>Address</b>
-                                    </label>
-                                    <div>
-                                        <p>
-                                            {StyledAddress(
-                                                data?.result2?.address
-                                            )}
-                                        </p>
-                                        <button onClick={copyAddress}>
-                                            {addressCopyFlag ? (
-                                                <BiCheckDouble />
-                                            ) : (
-                                                <BiCopy />
-                                            )}
-                                        </button>
-                                    </div>
-                                </span>
-                                <div className="footer">
-                                    <p style={{ color: "grey" }}>Powered by</p>
-                                    <img src={bitcoinFooter} alt="" />
-                                    <h6>BitcoinEVM</h6>
-                                </div>
-                                <p
-                                    className="text-center"
-                                    style={{ color: "#999999" }}
-                                >
+                                <h3>Paid and Confirmed</h3>
+                                <p className="details">POWERED BY BITCOINEVM</p>
+                                <p>
                                     The payment is processed on behalf of the
                                     merchant that refered you to this invoice by
                                     BitcoinEVM
                                 </p>
-                                <div className="spacer-10"></div>
-                            </>
+                            </div>
+                        ) : (
+                            <div className="flex middle center w100">
+                                <div className="next_modal">
+                                    <h2>Pay For Your Order</h2>
+                                    <p style={{ color: "grey" }}>
+                                        Scan the QR code, or copy and paste the
+                                        payment details into your wallet.
+                                    </p>
+                                    <QRCode
+                                        size={200}
+                                        className="qrcode"
+                                        value={data?.result2?.address || ""}
+                                        viewBox={`0 0 200 200`}
+                                    />
+                                    <div className="info_content">
+                                        <label>Amount</label>
+                                        <div>
+                                            <p>
+                                                {StyledFloat(
+                                                    data?.result1?.amount,
+                                                    8
+                                                ) + " BTC"}
+                                            </p>
+                                            <button onClick={copyAmount}>
+                                                {amountCopyFlag ? (
+                                                    <BiCheckDouble />
+                                                ) : (
+                                                    <BiCopy />
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="spacer-10"></div>
+                                    <div className="info_content">
+                                        <label>Address</label>
+                                        <div>
+                                            <p>
+                                                {StyledAddress(
+                                                    data?.result2?.address
+                                                )}
+                                            </p>
+                                            <button onClick={copyAddress}>
+                                                {addressCopyFlag ? (
+                                                    <BiCheckDouble />
+                                                ) : (
+                                                    <BiCopy />
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p className="details">
+                                        POWERED BY BITCOINEVM
+                                    </p>
+                                    <p>
+                                        The payment is processed on behalf of
+                                        the merchant that refered you to this
+                                        invoice by BitcoinEVM
+                                    </p>
+                                </div>
+                            </div>
                         )
                     ) : (
-                        <>
-                            <h3 className="spinner">Waiting response...</h3>
-                        </>
+                        <div className="loading">
+                            <h3 className="spinner"></h3>
+                            <h4>Waiting...</h4>
+                        </div>
                     )}
                 </div>
+                <div className="spacer-50"></div>
+                <Content />
+                <Feature />
             </div>
+            <Footer />
+            <img src={back} alt="" className="back" />
         </div>
     );
 }

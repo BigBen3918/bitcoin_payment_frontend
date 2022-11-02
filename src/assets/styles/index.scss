@@ -1,24 +1,6 @@
 @import "./common";
 @import "./page/index";
 
-// body {
-//     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-//     background-size: 400% 400%;
-//     animation: gradient 15s ease infinite;
-
-//     @keyframes gradient {
-//         0% {
-//             background-position: 0% 50%;
-//         }
-//         50% {
-//             background-position: 100% 50%;
-//         }
-//         100% {
-//             background-position: 0% 50%;
-//         }
-//     }
-// }
-
 .spacer-10 {
     height: 10px;
 }
@@ -35,70 +17,45 @@
     height: 50px;
 }
 
-// Custom Toastify Style
-.Toastify__toast-body {
-    font-size: 18px;
-    width: 100%;
-    font-weight: bolder;
-}
-.Toastify__toast--success {
-    border: 1px solid var(--toastify-color-success) !important;
-    color: var(--toastify-color-success) !important;
-    text-shadow: 0 0 20px var(--toastify-color-success);
-    background: rgba(7, 188, 12, 0.15) !important;
-}
-.Toastify__toast--warning {
-    border: 1px solid var(--toastify-color-warning) !important;
-    color: var(--toastify-color-warning) !important;
-    text-shadow: 0 0 20px var(--toastify-color-warning);
-    background: rgba(241, 195, 15, 0.15) !important;
-}
-.Toastify__toast--error {
-    border: 1px solid var(--toastify-color-error) !important;
-    color: var(--toastify-color-error) !important;
-    text-shadow: 0 0 20px var(--toastify-color-error);
-    background: rgba(231, 76, 60, 0.15) !important;
-}
-
-// Spinner Style
-.loading {
-    display: flex;
-    justify-content: center;
-}
-
-.loading::after {
-    content: "";
-    width: 50px;
-    height: 50px;
-    border: 10px solid #dddddd;
-    border-top-color: #009579;
-    border-radius: 50%;
-    animation: loading 1s ease infinite;
-}
-
-@keyframes loading {
-    to {
-        transform: rotate(1turn);
-    }
-}
-
-// style 2
-
+// style
 .spinner {
     position: relative;
+    text-align: center;
+    width: 250px;
+    height: 250px;
 
     &:before {
         content: "";
         position: absolute;
-        bottom: 300%;
-        left: 5vw;
-        width: 100px;
-        height: 100px;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 250px;
         border-radius: 50%;
-        border: 2px solid transparent;
+        border: 5px solid transparent;
         border-top-color: #07d;
         border-bottom-color: #07d;
-        animation: spinner 1s ease infinite;
+        animation: spinner 1.5s ease infinite;
+    }
+
+    @media screen and (max-width: 425px) {
+        width: 150px;
+        height: 150px;
+
+        &::before {
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    @media screen and (max-width: 270px) {
+        width: 50px;
+        height: 50px;
+
+        &::before {
+            width: 50px;
+            height: 50px;
+        }
     }
 }
 

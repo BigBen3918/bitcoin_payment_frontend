@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { StyledFloat, Toast } from "../utils";
 import Action from "../service";
 import bitcoinFooter from "../assets/images/bitcoin_footer.png";
+import back from "../assets/images/back.png";
 import axios from "axios";
+import Content from "../components/content";
+import Feature from "../components/feature";
+import Footer from "../components/footer";
 
 export default function Main() {
     const navigate = useNavigate();
@@ -13,6 +17,7 @@ export default function Main() {
     const [amount, setAmount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [btcPrice, setBtcPrice] = useState(0);
+    const [ismobile, setMobile] = useState(false);
 
     useEffect(() => {
         let timeHandler: any;
@@ -33,6 +38,19 @@ export default function Main() {
 
         return () => timeHandler && clearTimeout(timeHandler);
     }, [time]);
+
+    useEffect(() => {
+        const resize = () => {
+            if (window.innerWidth < 768) {
+                setMobile(true);
+            } else {
+                setMobile(false);
+            }
+        };
+
+        resize();
+        window.addEventListener("resize", () => resize());
+    }, []);
 
     const HandleSubmit = async () => {
         if (address.trim() === "") {
@@ -74,66 +92,61 @@ export default function Main() {
     };
 
     return (
-        <>
-            <div className="container">
+        <div className="relative">
+            <div className="container-xl z-10">
                 <div className="title">
                     <img src={bitcoinFooter} alt="" />
-                    <h3>Bitcoin Payment</h3>
+                    <p>bitcoin payment</p>
                 </div>
-                <div className="main">
-                    <div>
-                        <h2>Exchange Request</h2>
-                        <p style={{ color: "grey" }}>
-                            The exchange amount must be at least{" "}
-                            <b style={{ color: "var(--secondary)" }}>
-                                +0.00000001
-                            </b>{" "}
-                            <b>BTC</b>. Fill out the form to request a exchange
-                            for the excess amount.
-                        </p>
-                        <div className="info_field">
+                <div className="row center m0">
+                    <div className="col-sm-12 col-md-5 p1">
+                        <div className="main_title">
                             <div>
-                                <label>
-                                    <b>
-                                        Your Email Address
-                                        <i style={{ color: "red" }}>*</i>
-                                    </b>
-                                </label>
+                                {!ismobile ? (
+                                    <>
+                                        <p>The most</p>
+                                        <div>
+                                            <b>trustable</b>
+                                        </div>
+                                        <p style={{ paddingBottom: "20px" }}>
+                                            payment app
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p>
+                                        The most <b>trustable</b> payment app
+                                    </p>
+                                )}
+                            </div>
+                            <p>
+                                Turn Bitcoin into dollars with the BitPay crypto
+                                debit card. Earn cash back automatically.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="col-sm-12 col-md-7 p1 flex center">
+                        <div className="modal">
+                            <div className="info_modal">
+                                <h3>Exchange Request</h3>
                                 <input
                                     type={"email"}
-                                    placeholder="Your email"
+                                    placeholder="Your email*"
                                     value={email}
                                     onChange={(e: any) =>
                                         setEmail(e.target.value)
                                     }
                                 />
-                            </div>
-                            <div>
-                                <label>
-                                    <b>
-                                        Your EVM Address
-                                        <i style={{ color: "red" }}>*</i>
-                                    </b>
-                                </label>
                                 <input
                                     type={"text"}
-                                    placeholder="Your Bitcoin address"
+                                    placeholder="Your EVM address*"
                                     value={address}
                                     onChange={(e: any) =>
                                         setAddress(e.target.value)
                                     }
                                 />
-                            </div>
-                            <div>
-                                <label>
-                                    <b>
-                                        Swap Amount
-                                        <i style={{ color: "red" }}>*</i>
-                                    </b>
-                                </label>
                                 <input
                                     type={"number"}
-                                    placeholder="Refound amount"
+                                    placeholder="Refound amount*"
                                     value={amount}
                                     onChange={(e: any) =>
                                         setAmount(e.target.value)
@@ -145,26 +158,32 @@ export default function Main() {
                                           "$"
                                         : null}
                                 </p>
+                                {loading ? (
+                                    <button>Submitting...</button>
+                                ) : (
+                                    <button onClick={HandleSubmit}>
+                                        Submit
+                                    </button>
+                                )}
+                                <p className="powered">POWERED BY BITCOINEVM</p>
+                                <p className="details">
+                                    The payment is processed on behalf of the
+                                    merchant that refered you to this invoice by
+                                    BitcoinEVM
+                                </p>
                             </div>
                         </div>
-                        {loading ? (
-                            <button>Submitting...</button>
-                        ) : (
-                            <button onClick={HandleSubmit}>Submit</button>
-                        )}
-                        <div className="footer">
-                            <p style={{ color: "grey" }}>Powered by</p>
-                            <img src={bitcoinFooter} alt="" />
-                            <h6>BitcoinEVM</h6>
-                        </div>
-                        <p className="text-center" style={{ color: "#999999" }}>
-                            The payment is processed on behalf of the merchant
-                            that refered you to this invoice by BitcoinEVM
-                        </p>
-                        <div className="spacer-10"></div>
                     </div>
                 </div>
+                <div className="spacer-20"></div>
+                <Content />
+                <Feature />
+
+                <div className="spacer-30"></div>
             </div>
-        </>
+
+            <Footer />
+            <img src={back} alt="" className="back" />
+        </div>
     );
 }

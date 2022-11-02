@@ -30,7 +30,7 @@ export const Toast = (message: string, status: string) => {
 };
 
 export const StyledAddress = (address: string) => {
-    if (address.length > 20)
+    if (address && address.length > 20)
         return address.slice(0, 10) + "..." + address.slice(-5);
     else return address;
 };
