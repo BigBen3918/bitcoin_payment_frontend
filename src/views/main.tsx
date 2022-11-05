@@ -8,6 +8,20 @@ import axios from "axios";
 import Content from "../components/content";
 import Feature from "../components/feature";
 import Footer from "../components/footer";
+import { TextField, withStyles } from "@material-ui/core";
+
+const CssTextField = withStyles({
+    root: {
+        "& label.Mui-focused": {
+            color: "orange",
+        },
+        "& .MuiInput-underline:after": {
+            borderBottomColor: "orange",
+        },
+        width: "100%",
+        flex: "1 1 70%",
+    },
+})(TextField);
 
 export default function Main() {
     const navigate = useNavigate();
@@ -128,36 +142,51 @@ export default function Main() {
                         <div className="modal">
                             <div className="info_modal">
                                 <h3>Exchange Request</h3>
-                                <input
+                                <CssTextField
                                     type={"email"}
-                                    placeholder="Your email*"
+                                    label="Your email*"
                                     value={email}
                                     onChange={(e: any) =>
                                         setEmail(e.target.value)
                                     }
                                 />
-                                <input
+                                <div className="spacer-10"></div>
+                                <CssTextField
                                     type={"text"}
-                                    placeholder="Your EVM address*"
+                                    label="Your EVM address*"
                                     value={address}
                                     onChange={(e: any) =>
                                         setAddress(e.target.value)
                                     }
                                 />
-                                <input
-                                    type={"number"}
-                                    placeholder="Refound amount*"
-                                    value={amount}
-                                    onChange={(e: any) =>
-                                        setAmount(e.target.value)
-                                    }
-                                />
-                                <p>
-                                    {amount > 0
-                                        ? StyledFloat(btcPrice * amount, 3) +
-                                          "$"
-                                        : null}
-                                </p>
+                                <div className="spacer-10"></div>
+                                <div className="w100 flex center bottom pl-10">
+                                    <CssTextField
+                                        type={"number"}
+                                        label="Bitcoin amount*"
+                                        value={amount}
+                                        onChange={(e: any) =>
+                                            setAmount(e.target.value)
+                                        }
+                                    />
+                                    <p
+                                        style={{
+                                            color: "#6c6c6c",
+                                            flex: "1 1 30%",
+                                            wordBreak: "keep-all",
+                                        }}
+                                    >
+                                        {amount > 0
+                                            ? "≈" +
+                                              StyledFloat(
+                                                  btcPrice * amount,
+                                                  2
+                                              ).toLocaleString() +
+                                              "US$"
+                                            : "≈0US$͌"}
+                                    </p>
+                                </div>
+                                <div className="spacer-10"></div>
                                 {loading ? (
                                     <button>Submitting...</button>
                                 ) : (
