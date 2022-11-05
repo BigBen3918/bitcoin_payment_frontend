@@ -183,7 +183,7 @@ export default function Main() {
                                                   2
                                               ).toLocaleString() +
                                               "US$"
-                                            : "≈0US$͌"}
+                                            : "≈ 0US$"}
                                     </p>
                                 </div>
                                 <div className="spacer-10"></div>
