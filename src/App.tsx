@@ -8,15 +8,14 @@ import "./assets/styles/index.scss";
 /** End CSS Style */
 
 // Lazy Pages
+import Loading from "./components/loading";
 const Home = lazy(() => import("./views/main"));
 const OrderStatus = lazy(() => import("./views/order"));
 
 export default function App() {
     return (
         <Router>
-            <Suspense
-                fallback={<h1 style={{ textAlign: "center" }}>Loading...</h1>}
-            >
+            <Suspense fallback={<Loading />}>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/:orderid" element={<OrderStatus />} />
